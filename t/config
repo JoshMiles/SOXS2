@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ "$1" = "-c" ]; then
+echo "==================================="
+echo "Enter OS name"
+echo "==================================="
+read os_name
+echo $os_name > os.cfg
+fi
+osname=$(head -n 1 os.cfg)
+vers=$(head -n 1 toolchain/versionmanager/vers)
+stage=$(head -n 1 toolchain/versionmanager/stage)
+rm grub.cfg
+echo "menuentry \"$osname ($vers - $stage)\" {
+multiboot /boot/lhc.bin
+}" > grub.cfg
+echo "DONE"

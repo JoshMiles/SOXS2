@@ -1,0 +1,3 @@
+#!/bin/bash
+osname=$(head -n 1 os.cfg)
+qemu-system-i386 -cdrom $osname.iso

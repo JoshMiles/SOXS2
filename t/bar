@@ -1,0 +1,3 @@
+#!/bin/bash
+bash kbuild
+bash run

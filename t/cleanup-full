@@ -1,0 +1,14 @@
+#!/bin/bash
+# Full cleanup - leaves just ./setup
+echo "Performing full cleanup..."
+rm -r build
+rm -r cross-compiler-setup
+rm -r src
+rm -r toolchain
+rm cleanup-full
+rm linker.ld
+rm grub.cfg
+rm kbuild
+rm run
+rm OS.iso
+echo "Done."

@@ -1,0 +1,3 @@
+echo "Moving KSRC files"
+cp ksrc/* src -R
+echo "Moved" 

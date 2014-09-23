@@ -1,0 +1,47 @@
+#!/bin/bash
+echo "============================"
+echo "Downloading final scripts..."
+echo "============================"
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/prep
+chmod a+x prep
+cd ..
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/run
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/kbuild
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/linker.ld
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/grub.cfg
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/cleanup
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/config
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/bar
+chmod a+x run
+chmod a+x kbuild
+chmod a+x cleanup
+chmod a+x config
+chmod a+x bar
+cd toolchain
+mkdir versionmanager
+cd versionmanager
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/versionmanager/manager
+cd ..
+cd ..
+echo "==========================="
+echo "Downloading HADRON..."
+echo "==========================="
+cd src
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/kernel.c
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/boot.s
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/terminal.h
+wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/stdio.h
+
+
+echo "==========================="
+echo "Configure LHC..."
+echo "==========================="
+cd ..
+bash config -c
+cd toolchain/versionmanager
+bash manager
+cd ..
+cd ..
+echo "==========================="
+echo "Setup complete."
+echo "==========================="

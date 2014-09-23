@@ -1,0 +1,146 @@
+#!/bin/bash
+# GCC script
+# This script will setup your cross compiler for you
+# Created for Emily's tutorial at int0x10
+
+# Useful functions
+function extract()
+{
+     if [ -f $1 ] ; then
+         case $1 in
+            *.tar.bz2)   
+                tar xvjf $1     
+                ;;
+            *.tar.gz)    
+                tar xvzf $1     
+                ;;
+            *.bz2)       
+                bunzip2 $1      
+                ;;
+            *.rar)
+                unrar x $1      
+                ;;
+            *.gz)
+                gunzip $1       
+                ;;
+            *.tar)
+                tar xvf $1      
+                ;;
+            *.tbz2)
+                tar xvjf $1     
+                ;;
+            *.tgz)
+                tar xvzf $1     
+                ;;
+            *.zip)
+                unzip $1        
+                ;;
+            *.Z)
+                uncompress $1   
+                ;;
+            *.7z)
+                7z x $1         
+                ;;
+            *)  
+                echo "'$1' cannot be extracted via extract" 
+                ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+rm -r $HOME/opt/cross
+
+# Download the tars
+clear
+echo "===================================="
+echo "Downloading required archives..."
+echo "===================================="
+cd ..
+cd cross-compiler-setup
+cd source_code
+wget ftp://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.gz
+wget ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.1/gcc-4.9.1.tar.gz
+wget https://gmplib.org/download/gmp/gmp-6.0.0a.tar.bz2
+wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.gz
+wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.2.tar.gz
+echo "====================================="
+echo "Installing texinfo..."
+echo "====================================="
+
+haveProg() {
+    [ -x "$(which $1)" ]
+}
+
+if haveProg apt-get ; then func_aptitude
+elif haveProg yum ; then func_yum
+else
+    echo 'This script only uses yum and aptitude.'
+    exit 2
+fi
+
+func_aptitude ()
+{
+    sudo apt-get install texinfo
+}
+func_yum ()
+{
+    sudo apt-get install texinfo
+}
+
+# Extract source code
+echo "====================================="
+echo "Extracting source code..."
+echo "====================================="
+
+extract binutils-2.24.tar.gz
+extract gcc-4.9.1.tar.gz
+mkdir gcc-4.9.1/gmp
+mkdir gcc-4.9.1/mpfr
+mkdir gcc-4.9.1/mpc
+tar xvzf gmp-6.0.0a.tar.bz2 -C gcc-4.9.1/gmp
+tar xvzf mpfr-3.1.2.tar.gz -C gcc-4.9.1/mpfr
+tar xvzf mpc-1.0.2.tar.gz -C gcc-4.9.1/mpc
+
+# Prepartion
+echo "====================================="
+echo "Preparing..."
+echo "====================================="
+
+export PREFIX="$HOME/opt/cross"
+export TARGET=i686-elf
+export PATH="$PREFIX/bin:$PATH"
+
+# Build Binutils
+
+echo "====================================="
+echo "Building BINUTILS"
+echo "====================================="
+
+mkdir build-binutils
+cd build-binutils
+../binutils-2.24/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --disable-werror
+make
+make install
+cd ..
+
+echo "====================================="
+echo "Building GCC (make take some time)"
+echo "====================================="
+
+mkdir build-gcc
+cd build-gcc
+../gcc-4.9.1/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers
+make all-gcc
+make all-target-libgcc
+make install-gcc
+make install-target-libgcc
+
+echo "=================================="
+echo "Checking version..."
+echo "=================================="
+$HOME/opt/cross/bin/$TARGET-gcc --version
+echo "DONE"
+
+bash post_gcc

@@ -1,0 +1,62 @@
+#!/bin/bash
+# This is the automated version managment system
+
+if [ ! -f stage ]; then
+   # the stage doesn't exist. default to prealpha
+   echo "PREALPHA" > stage
+fi
+
+# Check for stage flag
+if [ "$1" = "-s" ]; then
+   echo "Setting stage to: $2"
+   rm stage
+   echo "$2" > stage
+   rm vers
+   echo "0.0.0.1" > vers
+elif [ "$1" = "-c" ]; then
+   echo "Cleaning up..."
+   rm vers
+   rm stage
+   echo "DONE"
+else
+   if [ ! -f vers ]; then
+      echo "0.0.0.1" > vers
+      stge=$(head -n 1 stage)
+      echo "VERSION: 0.0.0.1 - $stge"
+   else
+      ver_num=$(head -n 1 vers)
+      part_one="NaN"
+      part_two="NaN"
+      part_three="NaN"
+      part_four="NaN"
+      for element in ${ver_num//./ } ; do
+        if [ "$part_one" = "NaN" ]; then
+           part_one="$element"
+        elif [ "$part_two" = "NaN" ]; then
+           part_two="$element"
+        elif [ "$part_three" =  "NaN" ]; then
+           part_three="$element"
+        elif [ "$part_four" =  "NaN" ]; then
+           part_four="$element"
+	fi
+      done
+      let part_four=$part_four+1
+      if [ $part_four -gt "9" ]; then
+         part_four="0"
+         let part_three=$part_three+1
+      fi
+      if [ $part_three -gt "9" ]; then
+         part_three="0"
+         let part_two=$part_two+1
+      fi
+      if [ $part_two -gt "9" ]; then
+         part_two="0"
+         let part_one=$part_one+1
+      fi
+      new_vers="$part_one.$part_two.$part_three.$part_four"
+      rm vers
+      echo $new_vers > vers
+      stge=$(head -n 1 stage)
+      echo "VERSION: $new_vers - $stge"
+   fi
+fi

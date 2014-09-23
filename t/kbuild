@@ -1,0 +1,36 @@
+#!/bin/bash
+
+errorlist=""
+error()
+{
+	errorlist="$errorlist $1"
+}
+
+echo "Cleaning up..."
+bash cleanup
+bash toolchain/prep
+bash mvksrc
+echo "Incrementing version..."
+cd toolchain/versionmanager
+bash manager
+cd ..
+cd ..
+pwd
+echo "Generating GRUB.cfg"
+bash config
+echo "Assembling boot.s"
+i686-elf-as src/boot.s -o build/boot.o
+echo "Compiling Kernel.c"
+i686-elf-gcc -c src/kernel.c -o build/kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+echo "Linking..."
+i686-elf-gcc -T linker.ld -o build/lhc.bin -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o -lgcc
+echo "Creating ISO..."
+mkdir -p isodir
+mkdir -p isodir/boot
+cp build/lhc.bin isodir/boot/lhc.bin
+mkdir -p isodir/boot/grub
+cp grub.cfg isodir/boot/grub/grub.cfg
+osname=$(head -n 1 os.cfg)
+grub2-mkrescue -o $osname.iso isodir
+echo "DONE"
+echo $errorlist

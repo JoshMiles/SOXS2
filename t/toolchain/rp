@@ -1,0 +1,47 @@
+#!/bin/bash
+# Created for Emily's tutorial at int0x10
+
+
+func_yum ()
+{
+sudo yum install wget
+sudo yum install gcc-c++
+sudo yum install make
+sudo yum install bison
+sudo yum install flex
+sudo yum install gmp
+sudo yum install mpfr
+sudo yum install mpc
+sudo yum install mono
+sudo yum install qemu
+sudo yum install git
+sudo yum install xorriso
+echo "DONE"
+}
+func_aptitude ()
+{
+sudo apt-get install wget
+sudo apt-get install g++
+sudo apt-get install make
+sudo apt-get install bison
+sudo apt-get install flex
+sudo apt-get install gmp
+sudo apt-get install mpfr
+sudo apt-get intall mpc
+sudo apt-get install mono
+sudo apt-get install qemu
+sudo apt-get install git
+sudo apt-get install xorriso
+echo "DONE"
+}
+
+haveProg() {
+    [ -x "$(which $1)" ]
+}
+
+if haveProg apt-get ; then func_aptitude
+elif haveProg yum ; then func_yum
+else
+    echo 'No package manager found!'
+    exit 2
+fi
