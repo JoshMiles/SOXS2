@@ -4,7 +4,7 @@ SOXS is a utility created for LHC. SOXS will automatically setup the LHC environ
 
 Got an issue or bug?
 ===
-[Report it here] (https://github.com/JoshMiles/SOXS/issues)
+[Report it here] (https://github.com/JoshMiles/SOXS2/issues)
 
 How to get SOXS
 ===
