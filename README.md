@@ -21,6 +21,9 @@ $ bash setup
 
 If you wish to cancel the setup, press _ctrl+c_.
 
+> NOTE: The toolchain and setup scripts are written in BASH, therefore you have to download and install Cygwin for windows computers to use it.
+> It is preferred if you worked in a Linux environment.
+
 After Setup
 ===
 Please see the wiki for documentation and how to use SOXS.
