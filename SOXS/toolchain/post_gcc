@@ -2,16 +2,16 @@
 echo "============================"
 echo "Downloading final scripts..."
 echo "============================"
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/prep
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/toolchain/prep
 chmod a+x prep
 cd ..
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/run
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/kbuild
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/linker.ld
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/grub.cfg
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/cleanup
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/config
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/bar
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/run
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/kbuild
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/linker.ld
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/grub.cfg
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/cleanup
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/config
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/bar
 chmod a+x run
 chmod a+x kbuild
 chmod a+x cleanup
@@ -20,17 +20,18 @@ chmod a+x bar
 cd toolchain
 mkdir versionmanager
 cd versionmanager
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/versionmanager/manager
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/toolchain/versionmanager/manager
 cd ..
 cd ..
 echo "==========================="
 echo "Downloading HADRON..."
 echo "==========================="
-cd src
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/kernel.c
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/boot.s
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/terminal.h
-wget https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/example/stdio.h
+mkdir ksrc
+cd ksrc
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/ksrc/kernel.c
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/ksrc/boot.s
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/ksrc/terminal.h
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/ksrc/stdio.h
 
 
 echo "==========================="

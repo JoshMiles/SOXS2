@@ -1,0 +1,62 @@
+#!/bin/bash
+# the setup script
+# use $ chmod a+x setup to mark it as executable
+# then use $ ./setup to run it. Or just use $ bash setup
+# Created for Emily's tutorial at int0x10
+
+# Useful functions
+function mkd {
+	mkdir $1
+	echo "Created: $1"
+}
+
+# Directory structure setup
+clear
+echo "====================================="
+echo "Setting up the directory structure..."
+echo "====================================="
+mkdir src
+mkdir build
+mkdir toolchain
+mkdir cross-compiler-setup
+cd cross-compiler-setup
+mkdir source_code
+cd ..
+cd toolchain
+
+# Download some useful toolchain scripts
+
+echo "====================================="
+echo "Downloading default toolchain scripts..."
+echo "====================================="
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/toolchain/rp
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/toolchain/gcc
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/toolchain/post_gcc
+cd ..
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/cleanup-full
+cd toolchain
+# Make the scripts executable
+
+echo "====================================="
+echo "Applying chmod..."
+echo "====================================="
+chmod a+x *
+cd ..
+chmod a+x cleanup-full
+chmod a+x setup
+echo "Done"
+cd toolchain
+
+# Installing dependancies
+
+echo "====================================="
+echo "Installing required packages..."
+echo "====================================="
+bash rp
+
+# Launch the GCC script
+
+echo "====================================="
+echo "Finished setup, launching gcc script..."
+echo "====================================="
+bash gcc
