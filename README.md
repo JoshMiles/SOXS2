@@ -10,7 +10,7 @@ How to get SOXS
 ===
 You do not need to download this repo to use SOXS. 
 
-You simply have to download [the setup script] (https://raw.githubusercontent.com/JoshMiles/SOXS/master/OTHER/setup) (right click > _save as_).
+You simply have to download [the setup script] (https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/toolchain/setup) (right click > _save as_).
 
 Place the script in a new directory (perhaps `$HOME/LHC`) and then run it using
 ```
