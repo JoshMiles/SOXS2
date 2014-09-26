@@ -57,6 +57,6 @@ else
       rm vers
       echo $new_vers > vers
       stge=$(head -n 1 stage)
-      echo "VERSION: $new_vers - $stge"
+      #echo "VERSION: $new_vers - $stge"
    fi
 fi

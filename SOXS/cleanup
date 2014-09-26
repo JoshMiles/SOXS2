@@ -1,4 +1,5 @@
 #!/bin/bash
+echo -ne "Cleaning up..."
 if [ "$1" = "-r" ]; then
    # reset
    cd toolchain/versionmanager

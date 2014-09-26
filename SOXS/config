@@ -1,7 +1,8 @@
 #!/bin/bash
 if [ "$1" = "-c" ]; then
+bash cleanup
 echo "==================================="
-echo "Enter OS name"
+echo "Enter OS name (cannot have spaces)"
 echo "==================================="
 read os_name
 echo $os_name > os.cfg
@@ -13,4 +14,3 @@ rm grub.cfg
 echo "menuentry \"$osname ($vers - $stage)\" {
 multiboot /boot/lhc.bin
 }" > grub.cfg
-echo "DONE"
