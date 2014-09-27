@@ -30,6 +30,10 @@ After Setup
 ===
 Please see the wiki for documentation and how to use SOXS.
 
+Installing SOXSIDE
+===
+To install SOXSIDE, please run the install_soxside script.
+
 Team
 ===
 Created by Emily and Splitty.

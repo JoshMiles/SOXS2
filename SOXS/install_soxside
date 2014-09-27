@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Setting up working environment for SOXSIDE..."
+cd ..
+mkdir SOXSIDE
+cd SOXSIDE
+echo "Downloading SOXSIDE..."
+wget https://github.com/JoshMiles/SOXS2/raw/master/SOXSIDE/SOXSIDE.exe
+echo "Downloading run script..."
+cd ..
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/run
+chmod a+x run
+echo "DONE"

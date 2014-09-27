@@ -12,6 +12,7 @@ wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/grub.cfg
 wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/cleanup
 wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/config
 wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/bar
+wget https://raw.githubusercontent.com/JoshMiles/SOXS2/master/SOXS/install_soxside
 chmod a+x run
 chmod a+x kbuild
 chmod a+x cleanup
