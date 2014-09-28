@@ -105,9 +105,13 @@ void terminal_putchar(char c)
 	if(c == '\n'){
 		terminal_column = 0;
 		terminal_row++;
+	}
+	else if(c == '\t')
+	{
+		terminal_column = terminal_column + 6;
 	}else{
 	terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-	if ( ++terminal_column == VGA_WIDTH )
+	if( ++terminal_column == VGA_WIDTH )
 	{
 		terminal_column = 0;
 		if ( ++terminal_row == VGA_HEIGHT )

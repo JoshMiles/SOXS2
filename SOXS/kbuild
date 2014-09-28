@@ -11,10 +11,11 @@ clear
 echo "=================="
 echo -e "\e[5mBuilding...\e[25m"
 echo "=================="
+cp ksrc/boot.s src/boot.s
+cp ksrc/kernel.c src/kernel.c
 echo -ne "Cleaning up...\003\r\t\t\t"
 bash cleanup
 bash toolchain/prep
-bash mvksrc
 echo -ne "Incrementing version...\003\r\t\t\t"
 cd toolchain/versionmanager
 bash manager
@@ -28,7 +29,7 @@ echo -ne "Assembling boot.s...\003\r\t\t\t"
 i686-elf-as src/boot.s -o build/boot.o
 echo "DONE"
 echo -ne "Compiling Kernel.c...\003\r\t\t\t"
-i686-elf-gcc -c src/kernel.c -o build/kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+i686-elf-gcc -c src/kernel.c -o build/kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra -I ksrc
 echo "DONE"
 echo -ne "Linking...\003\r\t\t\t"
 i686-elf-gcc -T linker.ld -o build/lhc.bin -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o -lgcc
@@ -48,3 +49,5 @@ echo "Errors:"
 echo $errorlist
 echo "========"
 
+rm src/boot.s
+rm src/kernel.c

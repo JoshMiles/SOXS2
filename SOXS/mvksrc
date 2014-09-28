@@ -1,3 +1,0 @@
-echo -ne "Moving KSRC files...\003\r\t\t\t"
-cp ksrc/* src -R
-echo "MOVED" 
