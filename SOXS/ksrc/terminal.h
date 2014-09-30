@@ -19,7 +19,7 @@ enum vga_color
 	COLOR_LIGHT_CYAN = 11,
 	COLOR_LIGHT_RED = 12,
 	COLOR_LIGHT_MAGENTA = 13,
-	COLOR_LIGHT_BROWN = 14,
+	COLOR_YELLOW = 14,
 	COLOR_WHITE = 15,
 };
  
@@ -83,6 +83,11 @@ void ch(enum vga_color vga_fg, enum vga_color vga_bg)
 	terminal_color = make_color(vga_fg, vga_bg);
 }
 
+void change_color(enum vga_color foreground, enum vga_color background)
+{
+	ch(foreground, background);
+}
+
 void chFG(uint8_t foregroundcolor)
 {
 	terminal_setcolor(foregroundcolor);
@@ -140,4 +145,3 @@ void printl(const char* data)
 {
 	terminal_writeline(data);
 }
-

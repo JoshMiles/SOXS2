@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include "user2.h" // Include other files in the kernel
-#include "user3.h"
 
 int entry_point()
 {
-	test();
-	test2();
+	change_color(COLOR_YELLOW, COLOR_BLACK);
 	printf("Testing newline char and testing tabbing!\n");
+	change_color(COLOR_GREEN, COLOR_MAGENTA);
 	printl("This is tabbed:\tHell yes!");
+	change_color(COLOR_BLACK, COLOR_WHITE);
+	printf("Josh, you've got to write some documentation on this...");
 	return 0;
 }
